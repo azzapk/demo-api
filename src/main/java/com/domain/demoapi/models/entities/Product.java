@@ -1,5 +1,7 @@
 package com.domain.demoapi.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
@@ -34,6 +36,7 @@ public class Product implements Serializable {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "supplier_id")
     )
+    @JsonManagedReference
     private Set<Supplier> suppliers;
 
     public Product() {

@@ -1,6 +1,7 @@
 package com.domain.demoapi.services;
 
 import com.domain.demoapi.models.entities.Product;
+import com.domain.demoapi.models.entities.Supplier;
 import com.domain.demoapi.models.repos.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,14 @@ public class ProductService {
 
     public void removeOne(Long id) {
         productRepo.deleteById(id);
+    }
+
+    public void addSupplier(Supplier supplier, Long productId){
+        Product product = findOne(productId);
+        if (product == null){
+            throw new RuntimeException("Product with ID : "+productId+" not found!");
+        }
+        product.getSuppliers().add(supplier);
+        save(product);
     }
 }
