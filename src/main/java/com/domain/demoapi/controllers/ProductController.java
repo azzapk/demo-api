@@ -1,6 +1,7 @@
 package com.domain.demoapi.controllers;
 
 import com.domain.demoapi.dto.ResponseData;
+import com.domain.demoapi.dto.SearchData;
 import com.domain.demoapi.dto.SupplierData;
 import com.domain.demoapi.models.entities.Product;
 import com.domain.demoapi.models.entities.Supplier;
@@ -13,6 +14,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -75,5 +77,25 @@ public class ProductController {
     @PostMapping("/{id}")
     public void addSupplier(@RequestBody Supplier supplier, @PathVariable("id") Long productId){
         productService.addSupplier(supplier, productId);
+    }
+
+    @PostMapping("/search/name")
+    public Product getProductByName(@RequestBody SearchData searchData){
+        return productService.findByProductName(searchData.getSearchKey());
+    }
+
+    @PostMapping("/search/namelike")
+    public List<Product> getProductByNameLike(@RequestBody SearchData searchData){
+        return productService.findByProductNameLike(searchData.getSearchKey());
+    }
+
+    @GetMapping("search/category/{categoryId}")
+    public List<Product> getProductByCategory(@PathVariable("categoryId") Long categoryId){
+        return productService.findByCategory(categoryId);
+    }
+
+    @GetMapping("search/supplier/{supplierId}")
+    public List<Product> getProductBySuplier(@PathVariable("supplierId") Long supplierId){
+        return productService.findBySupplier(supplierId);
     }
 }
