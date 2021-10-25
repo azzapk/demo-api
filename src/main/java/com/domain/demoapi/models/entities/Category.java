@@ -1,10 +1,15 @@
 package com.domain.demoapi.models.entities;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "tb_category")
+@Setter
+@Getter
 public class Category extends BaseEntity<String> implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -16,19 +21,4 @@ public class Category extends BaseEntity<String> implements Serializable {
     @Column(length = 100, nullable = false, unique = true)
     private String name;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
