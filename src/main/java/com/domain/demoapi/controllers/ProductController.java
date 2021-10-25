@@ -2,7 +2,6 @@ package com.domain.demoapi.controllers;
 
 import com.domain.demoapi.dto.ResponseData;
 import com.domain.demoapi.dto.SearchData;
-import com.domain.demoapi.dto.SupplierData;
 import com.domain.demoapi.models.entities.Product;
 import com.domain.demoapi.models.entities.Supplier;
 import com.domain.demoapi.services.ProductService;
