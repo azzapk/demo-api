@@ -49,8 +49,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public Iterable<Category> findAll(){
-        return categoryService.findAll();
+    public Iterable<Category> findAll(@RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
+        return categoryService.findAll(isDeleted);
     }
 
     @GetMapping("/{id}")
@@ -77,19 +77,24 @@ public class CategoryController {
         return ResponseEntity.ok(responseData);
     }
 
+    @DeleteMapping("/{id}")
+    public void removeOne(@PathVariable("id") Long id){
+        categoryService.removeOne(id);
+    }
+
     @PostMapping("/search/{size}/{page}")
-    public Iterable<Category> findByName(@RequestBody SearchData searchData, @PathVariable("size") int size, @PathVariable("page") int page){
+    public Iterable<Category> findByName(@RequestBody SearchData searchData, @PathVariable("size") int size, @PathVariable("page") int page, @RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
         Pageable pageable = PageRequest.of(page,size);
-        return categoryService.findByName(searchData.getSearchKey(), pageable);
+        return categoryService.findByName(searchData.getSearchKey(), pageable, isDeleted);
     }
 
     @PostMapping("/search/{size}/{page}/{sort}")
-    public Iterable<Category> findByName(@RequestBody SearchData searchData, @PathVariable("size") int size, @PathVariable("page") int page, @PathVariable("sort") String sort){
+    public Iterable<Category> findByName(@RequestBody SearchData searchData, @PathVariable("size") int size, @PathVariable("page") int page, @PathVariable("sort") String sort, @RequestParam(value = "isDeleted", required = false, defaultValue = "false") boolean isDeleted){
         Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
         if (sort.equalsIgnoreCase("desc")){
             pageable = PageRequest.of(page, size, Sort.by("id").descending());
         }
-        return categoryService.findByName(searchData.getSearchKey(), pageable);
+        return categoryService.findByName(searchData.getSearchKey(), pageable, isDeleted);
     }
 
     @PostMapping("/batch")

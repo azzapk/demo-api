@@ -1,7 +1,12 @@
 package com.domain.demoapi.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotEmpty;
 
+@Getter
+@Setter
 public class CategoryData {
 
     private Long id;
@@ -9,19 +14,4 @@ public class CategoryData {
     @NotEmpty(message = "Name is required!")
     private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
