@@ -1,5 +1,7 @@
 package com.domain.demoapi.models.entities;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -13,6 +15,8 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @MappedSuperclass
+@Getter
+@Setter
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity<T> {
 
@@ -30,35 +34,4 @@ public class BaseEntity<T> {
     @Temporal(TemporalType.TIMESTAMP)
     protected Date updatedDate;
 
-    public T getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(T createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public T getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(T updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
 }
